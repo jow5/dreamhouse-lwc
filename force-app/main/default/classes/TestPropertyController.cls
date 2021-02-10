@@ -76,4 +76,17 @@ private class TestPropertyController {
         System.assertEquals(1, items.size());
         System.assertEquals(MOCK_PICTURE_NAME, items[0].Title);
     }
+    static testMethod void testNoFutureDatedListings() {
+        Test.startTest();
+        Property__c property = new Property__c(Name = 'Name', Date_Listed__c = Date.today().addDays(1));
+        try{
+            insert property;
+            system.assert(false,'Expected custom validation error');
+        } catch (DMLException e) {
+            String message = e.getMessage();
+            Boolean isExpectedError = message.containsIgnoreCase('FIELD_CUSTOM_VALIDATION_EXCEPTION')
+                                    && message.containsIgnoreCase('Date_Listed__c');
+            system.assert(isExpectedError, 'Wrong error -- expected custom validation error');
+        }
+    }
 }
