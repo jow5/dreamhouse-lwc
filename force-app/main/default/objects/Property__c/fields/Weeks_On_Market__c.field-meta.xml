@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Thumbnail_IMG__c</fullName>
+    <fullName>Weeks_On_Market__c</fullName>
+    <description>Weeks On Market</description>
     <externalId>false</externalId>
-    <formula
-    >if(ISBLANK(Thumbnail__c), "", IMAGE(Thumbnail__c, "Picture", 200, 200))</formula>
+    <formula>FLOOR(Days_On_Market__c / 7)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-    <label>Main Thumbnail</label>
+    <label>Weeks On Market</label>
+    <precision>18</precision>
     <required>false</required>
+    <scale>0</scale>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
-    <type>Text</type>
+    <type>Number</type>
     <unique>false</unique>
 </CustomField>

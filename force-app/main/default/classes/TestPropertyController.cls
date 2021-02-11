@@ -76,6 +76,19 @@ private class TestPropertyController {
         System.assertEquals(1, items.size());
         System.assertEquals(MOCK_PICTURE_NAME, items[0].Title);
     }
+
+    static testMethod void testWeeksOnMarket(){
+        TestPropertyController.createProperties(1);
+        // Date_Listed__c defaults to TODAY-10 days
+        List<Property__c> properties = [
+            SELECT Weeks_On_Market__c
+            FROM Property__c
+            LIMIT 1
+        ];
+        Test.startTest();
+        System.assertEquals(1, properties[0].Weeks_On_Market__c);
+        Test.stopTest();
+    }
     static testMethod void testNoFutureDatedListings() {
         Test.startTest();
         Property__c property = new Property__c(Name = 'Name', Date_Listed__c = Date.today().addDays(1));
